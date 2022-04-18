@@ -43,6 +43,8 @@ class SearchMovies : AppCompatActivity() {
     lateinit var writer: String
     lateinit var actors: String
     lateinit var plot: String
+    var error: String? = null
+
 
 
 
@@ -64,7 +66,14 @@ class SearchMovies : AppCompatActivity() {
             getMovie()
         }
         saveMovieToDB_Button.setOnClickListener(){
-            saveMovie()
+            if (error == null){
+                saveMovie()
+            }
+            else{
+                displayText?.setText("No such movie found. Cannot save to DB :(")
+
+            }
+
         }
 
     }
@@ -140,9 +149,13 @@ class SearchMovies : AppCompatActivity() {
                 Log.d("TAG", "calling function to extractJSON")
                 jsonData = extractJSON(stb)
 
+                Log.d("TAG", "displaying details to user")
+                displayText?.setText(jsonData)
+
+
+
             }
-            Log.d("TAG", "displaying details to user")
-            displayText?.setText(jsonData)
+
         }
     }
 
@@ -152,6 +165,7 @@ class SearchMovies : AppCompatActivity() {
         // Extraction process
         Log.d("TAG", "beginning extraction process")
         val json = JSONObject(stb.toString())
+
 
         // all data stored in json is passed to JSONArray
         title = json.getString("Title")
@@ -193,13 +207,5 @@ class SearchMovies : AppCompatActivity() {
 
         return diaplayMovieDetail
     }
-
-
-
-
-
-
-
-
 
 }

@@ -2,10 +2,14 @@ package com.example.mobdevcw22
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.room.Room
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import java.io.IOException
 import java.io.InputStream
@@ -27,8 +31,8 @@ class AddMovieList : AppCompatActivity() {
     var plotArray = arrayListOf<String>()
 
 
-    // the DAO for interacting with the movie database
-//    lateinit var movieDao: MovieDao
+//     the DAO for interacting with the movie database
+    lateinit var movieDao: MovieDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,34 +40,47 @@ class AddMovieList : AppCompatActivity() {
 
         jsonText = findViewById<ListView>(R.id.jsonList)
 
-        getJson()
+        //create the database
+        val db = Room.databaseBuilder(this, MovieDatabase::class.java, "myMovieDB").build()
+        movieDao = db.movieDao()
 
-//        //create the database
-//        val db = Room.databaseBuilder(this, MovieDatabase::class.java, "myMovieDB").build()
-//        movieDao = db.movieDao()
+        Log.d("TAG", "Calling savemovieList function")
+        saveMovieList()
 
 
-//                for (i in 0..titleArray.size){
-//                    var movie = Movie(
-//                        0,
-//                        titleArray[i],
-//                        yearArray[i],
-//                        ratedArray[i],
-//                        releasedArray[i],
-//                        runtimeArray[i],
-//                        genreArray[i],
-//                        directorArray[i],
-//                        writerArray[i],
-//                        actorsArray[i],
-//                        plotArray[i]
-//                    )
-//                }
 
 
 
     }
 
+    fun saveMovieList(){
+        getJson()
+
+        // Save to DB
+        runBlocking {
+            withContext(Dispatchers.IO){
+                for (i in 0..titleArray.size-1){
+                    var movieArray = Movie(
+                        0,
+                        titleArray[i],
+                        yearArray[i],
+                        ratedArray[i],
+                        releasedArray[i],
+                        runtimeArray[i],
+                        genreArray[i],
+                        directorArray[i],
+                        writerArray[i],
+                        actorsArray[i],
+                        plotArray[i]
+                    )
+                    movieDao.addMovie(movieArray)
+                }
+            }
+        }
+    }
+
     fun getJson() {
+
 
         // Read json file
         var json: String?
