@@ -105,12 +105,12 @@ class SearchMovies : AppCompatActivity() {
     }
 
     fun getMovie() {
-        Log.d("TAG", "attempting extract of information from user ")
+        Log.d("TAG", "getting movie name entered by user ")
         val enteredMovieName = searchtext!!.text.toString().trim()
         if (enteredMovieName == ""){
             return
         }
-        Log.d("TAG", "got movie searched by user")
+        Log.d("TAG", "user entered movie: $enteredMovieName")
 
         your_key = "2d0cdf8e"
 

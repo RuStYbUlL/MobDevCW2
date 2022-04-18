@@ -13,8 +13,9 @@ import kotlinx.coroutines.internal.synchronized
 abstract class MovieDatabase : RoomDatabase(){
 
     abstract fun movieDao(): MovieDao
+
     companion object{
-        @Volatile // writes to this field is made visible to other threads
+        @Volatile // no matter what thread tries to access the instance it will always get the current instance, not one that is cached/out of date
         private var INSTANCE: MovieDatabase? = null // make MovieDatabase a singleton class - one instance of the class can be created and used everywhere.
 
         @OptIn(InternalCoroutinesApi::class)
@@ -28,6 +29,7 @@ abstract class MovieDatabase : RoomDatabase(){
             // If instance is null
             // Creating an instance of ROOM database
             // This block will be protected by concurrent execution by multiple threads
+            // Whatever thread enters the synchronised block, it is locked and makes sure no other threads can access at the same time
             synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
@@ -38,7 +40,6 @@ abstract class MovieDatabase : RoomDatabase(){
                 Log.d("TAG", "Getting the database instance")
                 return instance
             }
-
         }
     }
 }

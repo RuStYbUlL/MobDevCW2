@@ -24,6 +24,17 @@ class MainActivity : AppCompatActivity() {
             searchMovieActivity();
         }
 
+        searchActorButton.setOnClickListener(){
+            searchActorActivity();
+        }
+
+    }
+
+    fun searchActorActivity() {
+        val searchActorIntent = Intent(this, SearchActor::class.java)
+        startActivity(searchActorIntent)
+        Log.d("TAG", "onclick listener to searchActorButton created successfully")
+
     }
 
     fun searchMovieActivity() {

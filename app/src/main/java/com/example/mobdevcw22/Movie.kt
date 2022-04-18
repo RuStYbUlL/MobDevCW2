@@ -18,3 +18,5 @@ data class Movie(
     val actors: String,
     val plot: String
 )
+
+

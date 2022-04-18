@@ -1,7 +1,7 @@
 package com.example.mobdevcw22
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
+
 
 @Dao
 interface MovieDao {
@@ -15,4 +15,8 @@ interface MovieDao {
 
     @Query("DELETE from Movie")
     suspend fun deleteAll()
+
+    @Query("SELECT * FROM Movie WHERE Actors LIKE :enteredName")
+    suspend fun loadAllActors(enteredName: String): List<Movie>
 }
+
