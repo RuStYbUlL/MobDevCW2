@@ -124,16 +124,18 @@ class SearchMovies : AppCompatActivity() {
                 val url = URL(url_string)
                 Log.d("TAG", "connecting to API")
                 val con = url.openConnection() as HttpsURLConnection
-                Log.d("TAG", "connection to API successful")
-                Log.d("TAG", "storing retrieved json data from API to string builder 'stb'")
                 val bf: BufferedReader
                 try {
                     bf = BufferedReader(InputStreamReader(con.inputStream))
+                    Log.d("TAG", "connection to API successful")
+
                 }
                 catch (e: IOException) {
                     e.printStackTrace()
                     return@withContext
                 }
+
+                Log.d("TAG", "storing retrieved json data from API to string builder 'stb'")
                 var jsonLine = bf.readLine()
                 println("[jsonLine] - " + jsonLine.toString())
                 while(jsonLine != null){
@@ -206,3 +208,22 @@ class SearchMovies : AppCompatActivity() {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Student Id = 20200644
+* UOW Id = w1833522
+* */

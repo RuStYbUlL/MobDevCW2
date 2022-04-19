@@ -1,5 +1,6 @@
 package com.example.mobdevcw22
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         val searchAllMoviesIntent = Intent(this, SearchAllMovies::class.java)
         startActivity(searchAllMoviesIntent)
         Log.d("TAG", "onclick listener to searchAllMoviesButton created successfully")
+
     }
 
     fun searchActorActivity() {

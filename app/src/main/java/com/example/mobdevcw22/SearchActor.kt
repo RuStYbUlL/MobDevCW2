@@ -59,7 +59,6 @@ class SearchActor : AppCompatActivity() {
 
             }
         }
-//        resultMovies?.setText("Movie: " + actorArray.title +" - " + actorArray.released + "\n\n")
         var actorResult= actorArray.toString()
 
         // replace square brackets '[]' and commas ',' from 'actorResult'
@@ -75,3 +74,22 @@ class SearchActor : AppCompatActivity() {
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Student Id = 20200644
+* UOW Id = w1833522
+* */
