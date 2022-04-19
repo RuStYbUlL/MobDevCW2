@@ -10,14 +10,11 @@ import androidx.room.Room
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import org.json.JSONArray
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
-import java.net.HttpURLConnection
 import java.net.URL
 import org.json.JSONObject
-import java.util.*
 import javax.net.ssl.HttpsURLConnection
 
 
@@ -57,9 +54,9 @@ class SearchMovies : AppCompatActivity() {
         movieDao = db.movieDao();
 
         // Movie user entered
-        searchtext = findViewById(R.id.editText)
-        displayText = findViewById(R.id.textView)
-        retrieveMovieButton = findViewById(R.id.retrieveButton)
+        searchtext = findViewById(R.id.editText2)
+        displayText = findViewById(R.id.textView2)
+        retrieveMovieButton = findViewById(R.id.retrieveButton2)
         saveMovieToDB_Button = findViewById(R.id.saveToDB_button)
 
         retrieveMovieButton.setOnClickListener(){

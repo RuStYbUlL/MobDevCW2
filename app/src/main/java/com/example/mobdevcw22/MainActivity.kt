@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         val addMovieButton = findViewById<Button>(R.id.button1)
         val searchMovieButton = findViewById<Button>(R.id.button2)
         val searchActorButton = findViewById<Button>(R.id.button3)
+        val searchAllMoviesButton = findViewById<Button>(R.id.button4)
 
         addMovieButton.setOnClickListener(){
             addMovieActivity();
@@ -28,6 +29,16 @@ class MainActivity : AppCompatActivity() {
             searchActorActivity();
         }
 
+        searchAllMoviesButton.setOnClickListener(){
+            searchAllMoviesActivity()
+        }
+
+    }
+
+    fun searchAllMoviesActivity() {
+        val searchAllMoviesIntent = Intent(this, SearchAllMovies::class.java)
+        startActivity(searchAllMoviesIntent)
+        Log.d("TAG", "onclick listener to searchAllMoviesButton created successfully")
     }
 
     fun searchActorActivity() {

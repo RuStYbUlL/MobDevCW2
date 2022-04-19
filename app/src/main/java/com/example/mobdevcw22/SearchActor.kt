@@ -32,9 +32,9 @@ class SearchActor : AppCompatActivity() {
         val db = Room.databaseBuilder(this, MovieDatabase::class.java, "myMovieDB").build()
         movieDao = db.movieDao();
 
-        searchActor = findViewById(R.id.actorNameText)
-        searchActorButton = findViewById(R.id.actorSearchButton)
-        resultMovies = findViewById(R.id.actorResultText)
+        searchActor = findViewById(R.id.allMovieText)
+        searchActorButton = findViewById(R.id.allMovieSearchButton)
+        resultMovies = findViewById(R.id.allMovieResultText)
 
         //make scrollable textview
         resultMovies?.setMovementMethod(ScrollingMovementMethod())
@@ -59,10 +59,18 @@ class SearchActor : AppCompatActivity() {
 
             }
         }
+//        resultMovies?.setText("Movie: " + actorArray.title +" - " + actorArray.released + "\n\n")
+        var actorResult= actorArray.toString()
 
+        // replace square brackets '[]' and commas ',' from 'actorResult'
+        Log.d("TAG", "Before replace method "+ actorResult)
+        actorResult = actorResult.replace("[", "")
+        actorResult = actorResult.replace(",", "")
+        actorResult = actorResult.replace("]", "")
+        Log.d("TAG", "After replace method "+ actorResult)
 
-        resultMovies?.setText(actorArray.toString())
-//        val query = "SELECT title, actor FROM Movie WHERE actors LIKE :enteredName"
+        // display results to user
+        resultMovies?.setText(actorResult)
 
 
     }
